@@ -38,6 +38,14 @@ gulp.task('build',
 gulp.task('default',
   gulp.series('build', server, watch));
 
+var deploy = require('gulp-deploy-git');
+
+gulp.task('deploy', function() {
+  return gulp.src('dist/**/*')
+    .pipe(deploy({
+      repository: 'https://github.com/janelljchen/design-portfolio.git'
+    }));
+});
 // Delete the "dist" folder
 // This happens every time a build starts
 function clean(done) {
