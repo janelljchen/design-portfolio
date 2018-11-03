@@ -38,14 +38,13 @@ gulp.task('build',
 gulp.task('default',
   gulp.series('build', server, watch));
 
-var deploy = require('gulp-deploy-git');
+var deploy = require('gulp-gh-pages');
 
 gulp.task('deploy', function() {
-  return gulp.src('dist/**/*')
-    .pipe(deploy({
-      repository: 'https://github.com/janelljchen/design-portfolio.git'
-    }));
+  return gulp.sec("./dist/**/*")
+    .pipe(deploy())
 });
+
 // Delete the "dist" folder
 // This happens every time a build starts
 function clean(done) {
@@ -160,6 +159,8 @@ function server(done) {
     server: PATHS.dist, port: PORT
   }, done);
 }
+
+
 
 // Reload the browser with BrowserSync
 function reload(done) {
